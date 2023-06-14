@@ -11,6 +11,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: |-
+          echo
+          "what the hell"
+      - run: |-
           docker run 
           -it 
           --rm 
