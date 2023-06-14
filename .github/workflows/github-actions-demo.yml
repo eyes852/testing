@@ -11,13 +11,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: |-
-          echo
+          echo \
           "what the hell"
       - run: |-
-          docker run 
-          -it 
-          --rm 
-          --security-opt=label=disable 
-          --env PFLT_LOGLEVEL=trace
+          docker run \
+          -it \
+          --rm \
+          --security-opt=label=disable \
+          --env PFLT_LOGLEVEL=trace \
           quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb:latest 
      
