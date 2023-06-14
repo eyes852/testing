@@ -15,7 +15,7 @@ jobs:
           "what the hell"
       - run: |-
           docker run \
-          -it \
+          -dit \
           --rm \
           --security-opt=label=disable \
           --env PFLT_LOGLEVEL=trace \
