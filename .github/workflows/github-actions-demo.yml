@@ -28,7 +28,7 @@ jobs:
           echo "PASSED=$PASSED" >> $GITHUB_OUTPUT
       - if: ${{ steps.get_results_json.outputs.PASSED == 'true' }}
         run: |
-          echo "what the hell passed: true."
+          echo "passed: true."
       - if: ${{ steps.get_results_json.outputs.PASSED != 'true' }}
         run: |
           echo "passed: false"
