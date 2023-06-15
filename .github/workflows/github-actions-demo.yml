@@ -27,7 +27,7 @@ jobs:
         id: get_result_json
         uses: notiz-dev/github-action-json-property@v0.2.0
         with:
-            path: '/tmp/preflight-artifacts/result.json'
+            path: '/tmp/preflight-artifacts/results.json'
             prop_path: 'passed'
       - run: echo ${{ steps.get_result_json.outputs.prop }}        
       - if: ${{ steps.get_result_json.outputs.prop == true }}
