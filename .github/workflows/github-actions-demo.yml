@@ -10,6 +10,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - run: mkdir -P /tmp/preflight-artifacts
       - run: |-
           echo \
           "what the hell"
@@ -18,6 +19,15 @@ jobs:
           -i \
           --rm \
           --security-opt=label=disable \
-          --env PFLT_LOGLEVEL=trace \
+          --env PFLT_LOGLEVEL=info \
+          --env PFLT_ARTIFACTS=/artifacts \
+          -v /tmp/preflight-artifacts:/artifacts \
           quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb-ubi8:latest 
-     
+      - name: get result.json
+        id: get_result_json
+        uses: notiz-dev/github-action-json-property@release
+        with:
+            path: '/tmp/preflight-artifacts/result.json'
+            prop_path: 'passed'
+      - run: echo ${{ steps.get_result_json.outputs.prop }}        
+      - if: ${{ steps.get_result_json.outputs.prop ==true }}
