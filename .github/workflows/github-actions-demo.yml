@@ -22,15 +22,11 @@ jobs:
           quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb-ubi8:latest
       - name: get results.json
         id: get_results_json
-        uses: notiz-dev/github-action-json-property@v0.2.0
-        with:
-            path: '/tmp/preflight-artifacts/results.json'
-            prop_path: 'passed'
-        continue-on-error: true
-      - if: ${{ steps.get_results_json.outputs.prop }}
+        run: cat /tmp/preflight-artifacts/results.json
+      - if: ${{ fromJSON(steps.get_results_json.outputs).passed }}
         run: |
           echo "what the hell passed: ${{ steps.get_results_json.outputs.prop }}."
-      - if: ${{ steps.get_results_json.outputs.prop != true }}
+      - if: ${{ fromJSON(steps.get_results_json.outputs).passed != true }}
         run: |
           echo "passed: ${{ steps.get_results_json.outputs.prop }}."
           cat /tmp/preflight-artifacts/results.json
