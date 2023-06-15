@@ -19,7 +19,7 @@ jobs:
           --env PFLT_LOGLEVEL=info \
           --env PFLT_ARTIFACTS=/artifacts \
           -v /tmp/preflight-artifacts:/artifacts \
-          quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb:latest
+          quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb-ubi8:latest
       - name: get results.json
         id: get_results_json
         uses: notiz-dev/github-action-json-property@v0.2.0
@@ -27,6 +27,10 @@ jobs:
             path: '/tmp/preflight-artifacts/results.json'
             prop_path: 'passed'
         continue-on-error: true
+      - if: ${{ steps.get_results_json.outputs.prop == true }}
+        run: |
+          echo "passed: ${{ steps.get_results_json.outputs.prop }}."
+          cat /tmp/preflight-artifacts/results.json
       - if: ${{ steps.get_results_json.outputs.prop != true }}
         run: |
           echo "passed: ${{ steps.get_results_json.outputs.prop }}."
