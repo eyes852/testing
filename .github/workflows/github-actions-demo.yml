@@ -20,13 +20,13 @@ jobs:
           --env PFLT_ARTIFACTS=/artifacts \
           -v /tmp/preflight-artifacts:/artifacts \
           quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb:latest
-      - run: cat /tmp/preflight-artifacts/results.json
       - name: get results.json
         id: get_results_json
         uses: notiz-dev/github-action-json-property@v0.2.0
         with:
             path: '/tmp/preflight-artifacts/results.json'
-            prop_path: 'image'
-      - run: echo ${{ steps.get_results_json.outputs.propStr }}        
+            prop_path: 'passed'
       - if: ${{ steps.get_results_json.outputs.prop != true }}
-        run: exit 1
+        run: |
+          echo "Failed to test. result: ${{ steps.get_results_json.outputs.prop }}"
+          exit 1
