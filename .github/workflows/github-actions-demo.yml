@@ -19,7 +19,7 @@ jobs:
           --env PFLT_LOGLEVEL=info \
           --env PFLT_ARTIFACTS=/artifacts \
           -v /tmp/preflight-artifacts:/artifacts \
-          quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb:latest
+          quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb-ubi8:latest
       - run: cat /tmp/preflight-artifacts/results.json
       - name: get results.json
         id: get_results_json
