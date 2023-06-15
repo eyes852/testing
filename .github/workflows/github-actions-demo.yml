@@ -27,6 +27,6 @@ jobs:
         with:
             path: '/tmp/preflight-artifacts/results.json'
             prop_path: 'image'
-      - run: echo ${{ steps.get_result_json.outputs.prop }}        
+      - run: echo ${{ steps.get_result_json.outputs.propStr }}        
       - if: ${{ steps.get_result_json.outputs.prop == true }}
         run: exit 1
