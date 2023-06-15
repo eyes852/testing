@@ -22,12 +22,12 @@ jobs:
           quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb-ubi8:latest
       - name: get results.json
         id: get_results_json
-        run: cat /tmp/preflight-artifacts/results.json
-      - if: ${{ fromJSON(steps.get_results_json.outputs).passed }}
+        run: echo "RESULT=`cat /tmp/preflight-artifacts/results.json`" >> $GITHUB_OUTPUT
+      - if: ${{ fromJSON(steps.get_results_json.outputs.RESULT).passed }}
         run: |
-          echo "what the hell passed: ${{ steps.get_results_json.outputs.prop }}."
-      - if: ${{ fromJSON(steps.get_results_json.outputs).passed != true }}
+          echo "what the hell passed: true."
+      - if: ${{ fromJSON(steps.get_results_json.outputs.RESULT).passed != true }}
         run: |
-          echo "passed: ${{ steps.get_results_json.outputs.prop }}."
+          echo "passed: false"
           cat /tmp/preflight-artifacts/results.json
           exit 1
