@@ -24,9 +24,8 @@ jobs:
         id: get_results_json
         run: |
           RESULT=$(cat /tmp/preflight-artifacts/results.json)
-          PASSED=${{ fromJSON($RESULT) }}.passed
-          echo "PASSED=$PASSED" >> $GITHUB_OUTPUT
-      - if: ${{ fromJSON(steps.get_results_json.outputs.PASSED) == true }}
+          echo "RESULT=$RESULT" >> $GITHUB_OUTPUT
+      - if: ${{ fromJSON(steps.get_results_json.outputs.RESULT).passed == true }}
         run: |
           echo "what the hell passed: true."
       - if: ${{ fromJSON(steps.get_results_json.outputs.RESULT).passed != true }}
