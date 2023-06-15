@@ -29,5 +29,6 @@ jobs:
         continue-on-error: true
       - if: ${{ steps.get_results_json.outputs.prop != true }}
         run: |
-          echo "Failed to test. result: ${{ steps.get_results_json.outputs.prop }}"
+          echo "passed: ${{ steps.get_results_json.outputs.prop }}."
+          cat /tmp/preflight-artifacts/results.json
           exit 1
