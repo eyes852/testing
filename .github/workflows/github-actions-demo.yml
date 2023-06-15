@@ -25,7 +25,7 @@ jobs:
           quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb-ubi8:latest 
       - name: get result.json
         id: get_result_json
-        uses: notiz-dev/github-action-json-property@release
+        uses: notiz-dev/github-action-json-property@v0.2.0
         with:
             path: '/tmp/preflight-artifacts/result.json'
             prop_path: 'passed'
