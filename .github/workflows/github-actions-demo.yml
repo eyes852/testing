@@ -27,10 +27,9 @@ jobs:
             path: '/tmp/preflight-artifacts/results.json'
             prop_path: 'passed'
         continue-on-error: true
-      - if: ${{ steps.get_results_json.outputs.prop == true }}
+      - if: ${{ steps.get_results_json.outputs.prop }}
         run: |
-          echo "passed: ${{ steps.get_results_json.outputs.prop }}."
-          cat /tmp/preflight-artifacts/results.json
+          echo "what the hell passed: ${{ steps.get_results_json.outputs.prop }}."
       - if: ${{ steps.get_results_json.outputs.prop != true }}
         run: |
           echo "passed: ${{ steps.get_results_json.outputs.prop }}."
