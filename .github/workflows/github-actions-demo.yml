@@ -23,12 +23,12 @@ jobs:
       - name: get results.json
         id: get_results_json
         run: |
-          RESULT=$(cat /tmp/preflight-artifacts/results.json)
-          echo "RESULT=$RESULT" >> $GITHUB_OUTPUT
-      - if: ${{ fromJSON(steps.get_results_json.outputs.RESULT).passed == true }}
+          PASSED=$(cat /tmp/preflight-artifacts/results.json | jq '.passed')
+          echo "PASSED=$PASSED" >> $GITHUB_OUTPUT
+      - if: ${{ steps.get_results_json.outputs.PASSED == true }}
         run: |
           echo "what the hell passed: true."
-      - if: ${{ fromJSON(steps.get_results_json.outputs.RESULT).passed != true }}
+      - if: ${{ steps.get_results_json.outputs.PASSED == true }}
         run: |
           echo "passed: false"
           cat /tmp/preflight-artifacts/results.json
