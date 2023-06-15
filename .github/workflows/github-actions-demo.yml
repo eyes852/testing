@@ -2,7 +2,7 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  Build-Container:
+  Run-Preflight:
     runs-on: ubuntu-20.04
     steps:
       - uses: docker/login-action@v1
@@ -30,3 +30,10 @@ jobs:
         run: |
           echo "Failed to test. result: ${{ steps.get_results_json.outputs.prop }}"
           exit 1
+  Echo-Result:
+    runs-on: ubuntu-20.04
+    if: "failure()"
+    needs:
+      - Run-Preflight
+    steps:
+      - run: echo "failure"
