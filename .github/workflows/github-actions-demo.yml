@@ -1,11 +1,13 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [release]
+on: 
+  release:
+    type: [published]
 jobs:
   Run-Preflight:
     runs-on: ubuntu-20.04
     steps:
-      - uses: github/checkout@v3
+      - uses: actions/checkout@v3
       - run: docker build what-the-hell:v0.1 .
       - uses: docker/login-action@v1
         with:
