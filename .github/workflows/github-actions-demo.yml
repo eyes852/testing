@@ -22,7 +22,7 @@ jobs:
           --env PFLT_LOGLEVEL=info \
           --env PFLT_ARTIFACTS=/artifacts \
           -v /tmp/preflight-artifacts:/artifacts \
-          quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb-ubi8:latest 
+          quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb:latest 
       - name: get result.json
         id: get_result_json
         uses: notiz-dev/github-action-json-property@v0.2.0
