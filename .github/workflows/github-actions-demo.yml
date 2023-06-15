@@ -19,5 +19,5 @@ jobs:
           --rm \
           --security-opt=label=disable \
           --env PFLT_LOGLEVEL=trace \
-          quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb:latest 
+          quay.io/opdev/preflight:stable check container ghcr.io/loxilb-io/kube-loxilb-ubi8:latest 
      
