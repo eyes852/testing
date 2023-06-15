@@ -30,4 +30,4 @@ jobs:
             path: '/tmp/preflight-artifacts/result.json'
             prop_path: 'passed'
       - run: echo ${{ steps.get_result_json.outputs.prop }}        
-      - if: ${{ steps.get_result_json.outputs.prop ==true }}
+      - if: ${{ steps.get_result_json.outputs.prop == true }}
