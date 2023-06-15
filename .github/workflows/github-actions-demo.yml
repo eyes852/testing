@@ -10,7 +10,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: mkdir -P /tmp/preflight-artifacts
+      - run: mkdir -p /tmp/preflight-artifacts
       - run: |-
           echo \
           "what the hell"
