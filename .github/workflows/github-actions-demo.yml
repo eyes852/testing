@@ -26,14 +26,8 @@ jobs:
         with:
             path: '/tmp/preflight-artifacts/results.json'
             prop_path: 'passed'
+        continue-on-error: true
       - if: ${{ steps.get_results_json.outputs.prop != true }}
         run: |
           echo "Failed to test. result: ${{ steps.get_results_json.outputs.prop }}"
           exit 1
-  Echo-Result:
-    runs-on: ubuntu-20.04
-    if: "failure()"
-    needs:
-      - Run-Preflight
-    steps:
-      - run: echo "failure"
