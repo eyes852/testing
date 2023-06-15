@@ -33,6 +33,6 @@ jobs:
           echo "passed: true."
       - if: ${{ steps.get_results_json.outputs.PASSED != 'true' }}
         run: |
-          echo "passed: false"
+          echo "passed: false."
           cat /tmp/preflight-artifacts/results.json
           exit 1
