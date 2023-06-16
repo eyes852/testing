@@ -8,13 +8,13 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v3
-      - run: docker build --tag ghcr.io/what-the-hell:v0.1 .
+      - run: docker build --tag ghcr.io/eyes852/what-the-hell:v0.1 .
       - uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: docker push ghcr.io/what-the-hell:v0.1
+      - run: docker push ghcr.io/eyes852/what-the-hell:v0.1
       - run: mkdir -p /tmp/preflight-artifacts
       - run: |-
           docker run \
@@ -24,7 +24,7 @@ jobs:
           --env PFLT_LOGLEVEL=info \
           --env PFLT_ARTIFACTS=/artifacts \
           -v /tmp/preflight-artifacts:/artifacts \
-          quay.io/opdev/preflight:stable check container what-the-hell:v0.1
+          quay.io/opdev/preflight:stable check container ghcr.io/eyes852/what-the-hell:v0.1
       - name: get results.json
         id: get_results_json
         run: |
